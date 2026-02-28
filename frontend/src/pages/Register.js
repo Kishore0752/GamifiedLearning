@@ -67,10 +67,11 @@ export default function Register() {
         localStorage.setItem('userName', response.name);
         localStorage.setItem('userEmail', response.email);
         
-        // Wait a moment then reload page to trigger App.js auth check
-        setTimeout(() => {
-          window.location.href = '/dashboard';
-        }, 500);
+        // Trigger storage event for App.js to detect login
+        window.dispatchEvent(new Event('storage'));
+        
+        // Navigate using React Router
+        navigate('/dashboard');
       }
     } catch (err) {
       setError(err.message || 'Registration failed. Please try again.');

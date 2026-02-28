@@ -17,15 +17,23 @@ function App() {
     useEffect(() => {
         // Check if user is logged in (has userId in localStorage)
         const userId = localStorage.getItem('userId');
-        setIsLoggedIn(!!userId);
+        if (userId) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
         setLoading(false);
     }, []);
 
-    // Listen for storage changes (in case login happens in another tab)
+    // Listen for storage changes (for login/logout and cross-tab changes)
     useEffect(() => {
         const handleStorageChange = () => {
             const userId = localStorage.getItem('userId');
-            setIsLoggedIn(!!userId);
+            if (userId) {
+                setIsLoggedIn(true);
+            } else {
+                setIsLoggedIn(false);
+            }
         };
 
         window.addEventListener('storage', handleStorageChange);

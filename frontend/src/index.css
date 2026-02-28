@@ -34,7 +34,7 @@
   }
 
   .btn-gradient {
-    @apply bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300;
+    @apply bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-2 px-4 sm:px-6 rounded-lg transition-all duration-300 text-sm sm:text-base;
   }
 
   .card-hover {
@@ -42,7 +42,7 @@
   }
 
   .stat-box {
-    @apply glass-card p-6 text-center card-hover;
+    @apply glass-card p-4 sm:p-6 text-center card-hover;
   }
 
   .progress-gradient {
@@ -50,19 +50,66 @@
   }
 
   .badge-glow {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-semibold text-sm;
+    @apply inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-semibold text-xs sm:text-sm;
   }
 
   .input-enhanced {
-    @apply w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200;
+    @apply w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base;
   }
 
   .form-group {
-    @apply mb-5;
+    @apply mb-4 sm:mb-5;
   }
 
   .form-label {
-    @apply block text-sm font-semibold text-slate-300 mb-2;
+    @apply block text-xs sm:text-sm font-semibold text-slate-300 mb-2;
+  }
+
+  /* Mobile responsive containers */
+  .container-responsive {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .card-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+
+  .card-grid-2 {
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6;
+  }
+
+  /* Responsive text sizes */
+  .heading-lg {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold;
+  }
+
+  .heading-md {
+    @apply text-xl sm:text-2xl font-bold;
+  }
+
+  .heading-sm {
+    @apply text-lg sm:text-xl font-semibold;
+  }
+
+  .text-sm-responsive {
+    @apply text-xs sm:text-sm;
+  }
+
+  .text-base-responsive {
+    @apply text-sm sm:text-base;
+  }
+
+  /* Responsive spacing */
+  .p-responsive {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+
+  .px-responsive {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .gap-responsive {
+    @apply gap-3 sm:gap-4 lg:gap-6;
   }
 }
 
