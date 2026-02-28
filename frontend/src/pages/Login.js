@@ -13,7 +13,7 @@ const Login = () => {
         setError('');
 
         try {
-            const res = await fetch('http://localhost:5000/api/users/login', {
+            const res = await fetch('https://gamifiedlearning-bu11.onrender.com/api/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -32,7 +32,7 @@ const Login = () => {
             }
         } catch (err) {
             console.error("Login error", err);
-            setError("Server error. Make sure backend is running on port 5000.");
+            setError("Server error. Please check your connection and try again.");
         } finally {
             setLoading(false);
         }

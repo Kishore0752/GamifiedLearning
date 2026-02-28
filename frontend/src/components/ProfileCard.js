@@ -30,7 +30,7 @@ const ProfileCard = ({ user }) => {
         setUploading(true);
         try {
             const userId = localStorage.getItem('userId');
-            const response = await fetch('http://localhost:5000/api/users/update-profile-picture', {
+            const response = await fetch('https://gamifiedlearning-bu11.onrender.com/api/users/update-profile-picture', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, profilePicture: profilePicturePreview })
