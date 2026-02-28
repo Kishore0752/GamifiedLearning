@@ -21,6 +21,11 @@ app.use(cors()); // Allows frontend to communicate with backend
 app.use(express.json()); // Essential for parsing JSON bodies
 app.use(logger); // Logs requests to the terminal for debugging
 
+// --- Health Check Endpoint ---
+app.get("/", (req, res) => {
+  res.send("🚀 CampusQuest Backend Running Successfully");
+});
+
 // --- Route Mounting ---
 // Every feature is separated into its own module for scalability
 
