@@ -26,7 +26,7 @@ export default function PostCard({ post, onPostUpdate }) {
   };
 
   const handleDeletePost = async () => {
-    if (post.author._id !== currentUserId) {
+    if (!post.author || post.author._id !== currentUserId) {
       alert('You can only delete your own posts!');
       return;
     }
@@ -185,7 +185,7 @@ export default function PostCard({ post, onPostUpdate }) {
         </button>
 
         {/* Delete Button (Only for post author) */}
-        {post.author._id === currentUserId && (
+        {post.author && post.author._id === currentUserId && (
           <button
             onClick={handleDeletePost}
             disabled={deleting}
