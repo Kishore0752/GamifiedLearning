@@ -479,22 +479,3 @@ We welcome contributions! To contribute:
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
-
-## 📞 Support
-
-For support, email support@campusquest.com or open an issue on the GitHub repository.
-
----
-
-## 🙏 Acknowledgments
-
-- MongoDB Atlas for database hosting
-- Tailwind CSS for styling framework
-- React community for excellent documentation
-- All contributors and users of CAMPUSQUEST
-
----
-
-**Built with ❤️ by the CAMPUSQUEST Team**
-
-**Last Updated:** February 28, 2026
