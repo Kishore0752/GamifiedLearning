@@ -8,19 +8,46 @@ const User = require('../models/User');
 
 /**
  * @route   POST /api/users/register
- * @desc    Register a new student with institutional profile
+ * @desc    Register a new student with institutional profile and password
  */
 router.post('/register', async (req, res) => {
   try {
+    const { email, password, confirmPassword } = req.body;
+
+    // Validate required fields
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required." });
+    }
+
+    // Validate password strength
+    if (password.length < 6) {
+      return res.status(400).json({ error: "Password must be at least 6 characters long." });
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      return res.status(400).json({ error: "Passwords do not match." });
+    }
+
     // Check if user already exists
-    const existingUser = await User.findOne({ email: req.body.email });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "User with this institutional email already exists." });
     }
 
+    // Create new user with password
     const newUser = new User(req.body);
     const user = await newUser.save();
-    res.status(201).json(user);
+    
+    // Return user data without password
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      department: user.department,
+      year: user.year,
+      msg: "Registration successful"
+    });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -67,21 +94,29 @@ router.get('/all', async (req, res) => {
 
 /**
  * @route   POST /api/users/login
- * @desc    Login with email - simple login without password
+ * @desc    Login with email and password
  */
 router.post('/login', async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email, password } = req.body;
 
-    if (!email) {
-      return res.status(400).json({ msg: "Email is required" });
+    // Validate required fields
+    if (!email || !password) {
+      return res.status(400).json({ msg: "Email and password are required" });
     }
 
     // Find user by email
     const user = await User.findOne({ email });
     
     if (!user) {
-      return res.status(404).json({ msg: "User not found. Please register first." });
+      return res.status(404).json({ msg: "Invalid email or password." });
+    }
+
+    // Compare passwords
+    const isPasswordValid = await user.comparePassword(password);
+    
+    if (!isPasswordValid) {
+      return res.status(401).json({ msg: "Invalid email or password." });
     }
 
     // Return user data for frontend to store in localStorage

@@ -3,8 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -16,7 +18,7 @@ const Login = () => {
             const res = await fetch('https://gamifiedlearning-bu11.onrender.com/api/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
+                body: JSON.stringify({ email, password })
             });
 
             const data = await res.json();
@@ -32,7 +34,7 @@ const Login = () => {
                 // Navigate using React Router
                 navigate('/dashboard');
             } else {
-                setError(data.msg || "User not found. Please register first.");
+                setError(data.msg || "Invalid email or password.");
             }
         } catch (err) {
             console.error("Login error", err);
@@ -85,6 +87,30 @@ const Login = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
+                        </div>
+
+                        <div>
+                            <label className="block text-xs sm:text-sm font-semibold text-slate-300 mb-2 sm:mb-3 uppercase">
+                                Password
+                            </label>
+
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    required
+                                    className="input-enhanced w-full pr-10"
+                                    placeholder="Enter your password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-200 transition"
+                                >
+                                    {showPassword ? '👁️' : '👁️‍🗨️'}
+                                </button>
+                            </div>
                         </div>
 
                         <button

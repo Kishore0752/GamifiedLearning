@@ -1,42 +1,141 @@
+/* Dark Sci-Fi Cockpit Global Styles */
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
+/* Mission Control HUD */
+.mission-hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(90deg, rgba(0, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1;
+}
+
+/* Neon Glow Effect */
+.neon-border {
+  position: relative;
+  border: 1px solid;
+}
+
+.neon-border.cyan {
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1);
+}
+
+.neon-border.gold {
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.1);
+}
+
+.neon-border.green {
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3), inset 0 0 10px rgba(34, 197, 94, 0.1);
+}
+
+/* Logo with Sci-Fi Glow */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  height: 3em;
+  padding: 1em;
+  transition: all 300ms ease-out;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+  animation: float 3s ease-in-out infinite;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
+  transform: scale(1.1);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
+/* Card Styles */
 .card {
-  padding: 2em;
+  padding: 1.5em;
+  border-radius: 0.75rem;
+  background: rgba(15, 21, 53, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  transition: all 300ms ease;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
 }
 
-.read-the-docs {
-  color: #888;
+.card:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 255, 0.4);
+}
+
+/* Constellation Map - Skill Tree */
+.constellation {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.constellation-node {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  margin: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15, 21, 53, 0.8), rgba(10, 14, 39, 0.9));
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+
+.constellation-node.unlocked {
+  border-color: rgba(0, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.constellation-node.locked {
+  opacity: 0.5;
+  border-color: rgba(0, 255, 255, 0.1);
+}
+
+.constellation-node:hover:not(.locked) {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+  transform: scale(1.1);
+}
+
+/* Scanline Overlay */
+.scanlines-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.08),
+    rgba(0, 0, 0, 0.08) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: 999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .constellation-node {
+    width: 50px;
+    height: 50px;
+    margin: 15px;
+  }
 }
